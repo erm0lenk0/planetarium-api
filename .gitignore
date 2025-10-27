@@ -4,3 +4,4 @@ templates
 */migrations/
 !*/migrations/__init__.py
 *.sqlite3
+.env
