@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, User
+
 
 class AstronomyShow(models.Model):
     id = models.AutoField(primary_key=True)
@@ -32,7 +34,7 @@ class PlanetariumDome(models.Model):
 class Reservation(models.Model):
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Reservation #{self.id} by {self.user.username}"
@@ -62,3 +64,4 @@ class Ticket(models.Model):
 
     class Meta:
         unique_together = ("show_session", "row", "seat")
+
